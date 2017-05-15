@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CRUD Demo</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script>
+    var uri = 'api/Nation';
+
+    function get() {
+        $.getJSON(uri)
+            .done(function (data) {
+                $.each(data, function (key, item) {
+                    $('<li>', { text: "Nation: " + item.NationName + " | Population: " + item.NationPop }).appendTo($('#nations'));
+                });
+            });
+    }
+
+    function post() {
+        var nat = $('#newNation').val();
+        $.post(uri + '/' + nat)
+    }
+
+    </script>
+
+</head>
+<body>
+
+    <div>
+        <label for="newNation">Nation</label>
+        <input type="text" id="newNation" size="50" />
+        <label for="newPop">Population</label>
+        <input type="text" id="newPop" size="50" />
+        <input type="button" value="CREATE" onclick="post();" />
+    </div>
+
+    <br />
+
+    <div>
+        <input type="button" value="READ" onclick="get();" />
+        <p id="nations" />
+    </div>
+
+    <br />
+
+    <div>
+        <input type="button" value="UPDATE" onclick="get();" />
+        <p id="nations" />
+    </div>
+
+    <br />
+
+    <div>
+        <input type="button" value="DELETE" onclick="get();" />
+        <p id="nations" />
+    </div>
+
+</body>
+</html>
